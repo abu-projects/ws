@@ -2752,8 +2752,8 @@ a[class*=' button-reveal']:hover i, a[class*=' button-reveal']:focus i, a[class^
 .button-reveal-left-outline-grey:hover, .button-reveal-left-outline-grey:focus, a.button-reveal-left-outline-grey:hover, a.button-reveal-left-outline-grey:focus,
 .button-reveal-right-outline-grey:hover,
 .button-reveal-right-outline-grey:focus, a.button-reveal-right-outline-grey:hover, a.button-reveal-right-outline-grey:focus {
-  border-color: #5DC248;
-  color: #5DC248;
+  border-color: #5DD545;
+  color: #5DD545;
 }
 
 .button-reveal-left-outline-grey span, a.button-reveal-left-outline-grey span,
@@ -9938,7 +9938,7 @@ body.loaded:after {
 }
 
 *.text-green {
-  color: #5DC248;
+  color: #5DD545;
 }
 
 *.text-blue {
@@ -10782,8 +10782,20 @@ div[class^='bg-black'] .border-all, div[class^='bg-black'] .border-top, div[clas
   background-color: #3E3A39;
   }
 .prices-box .button-dark:hover{
-background-color: #5DC248;
+background-color: #5DD545;
 }
 .contact .button-outline-dark-2:hover{
-  background-color: #5DC248; 
+  background-color: #5DD545; 
+}
+.footer-logo{
+  width: 200px;
+  margin-bottom: 10px;
+}
+.scrolltotop .button-circle-dark{
+  background-color: #3E3A39;
+  border: 1px solid #fff;
+}
+.scrolltotop .button-circle-dark:hover{
+  background-color: #5DD545;
+  border: 1px solid #fff;
 }
