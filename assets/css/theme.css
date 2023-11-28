@@ -813,7 +813,7 @@ div[class^='bg-black'] .pagination.hover-style-2 .page-item.active .page-link, d
 
 .bg-image {
   position: relative;
-  background-position: center center;
+  background-position: center;
   background-attachment: scroll;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -10789,7 +10789,7 @@ background-color: #5DD545;
 }
 .footer-logo{
   width: 200px;
-  margin-bottom: 10px;
+  margin-bottom: 18px;
 }
 .scrolltotop .button-circle-dark{
   background-color: #3E3A39;
@@ -10798,4 +10798,17 @@ background-color: #5DD545;
 .scrolltotop .button-circle-dark:hover{
   background-color: #5DD545;
   border: 1px solid #fff;
+}
+.button-reveal-left-dark, a.button-reveal-left-dark, .button-reveal-right-dark, a.button-reveal-right-dark {
+  background: #3E3A39;
+
+}
+.button-reveal-left-dark:hover, .button-reveal-left-dark:focus, a.button-reveal-left-dark:hover, a.button-reveal-left-dark:focus, .button-reveal-right-dark:hover, .button-reveal-right-dark:focus, a.button-reveal-right-dark:hover, a.button-reveal-right-dark:focus {
+  background: #5DD545;
+}.bg-image{
+  background-position: bottom !important;
+    /* background-image: url(../images/bg.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed; */
 }

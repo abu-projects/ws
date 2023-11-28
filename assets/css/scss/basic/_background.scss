@@ -3,7 +3,7 @@
 //
 .bg-image {
 	position: relative;
-	background-position: center center;
+	background-position: center;
     background-attachment: scroll;
     @include background-size(cover);
     background-repeat: no-repeat;
