@@ -180,7 +180,7 @@ body {
 
 .position-middle {
   position: relative;
-  top: 50%;
+  top: 72%;
   -webkit-transform: translateY(-50%);
   transform: translateY(-50%);
   margin: 0 auto;
@@ -1969,9 +1969,11 @@ i {
 .accordion.rounded:not(.style-2) li .accordion-title {
   border-radius: 50px;
 }
-
+.bg-gray {
+  background: #f3f3f3;
+}
 .bg-gray .accordion.style-3 li .accordion-title, .bg-light-gray .accordion.style-3 li .accordion-title {
-  background: #fff;
+  background: #ffffff;
 }
 
 div[class^='bg-black'] .accordion li .accordion-title, div[class*=' bg-black'] .accordion li .accordion-title, div[class^='bg-dark'] .accordion li .accordion-title, div[class*=' bg-dark'] .accordion li .accordion-title {
@@ -2355,7 +2357,7 @@ a:focus, a:active, button:focus, button:active {
 }
 
 .button-dark, a.button-dark {
-  background: #1d2023;
+  background: #5DD545;
   border: 0;
   color: #fff;
 }
@@ -5348,6 +5350,9 @@ button.mfp-close:hover {
 
 .prices-box.prices-box-recommended {
   border-color: #000;
+}
+.prices-box.prices-box-recommended:hover {
+  border-color: #5DD545;
 }
 
 div[class^='bg-black'] .prices-box, div[class*=' bg-black'] .prices-box, div[class^='bg-dark'] .prices-box, div[class*=' bg-dark'] .prices-box {
@@ -10095,7 +10100,7 @@ div[class^='bg-black'] div[class^='bg-white'] .fancy-text.display-1, div[class^=
 .border-left {
   border-width: 0;
   border-style: solid;
-  border-color: rgba(0, 0, 0, 0.1) !important;
+  border-color: rgba(0, 0, 0, 0.40) !important;
 }
 
 .border-all {
@@ -10779,10 +10784,10 @@ div[class^='bg-black'] .border-all, div[class^='bg-black'] .border-top, div[clas
   padding-left: 0 !important;
 }
 .prices-box .button-dark{
-  background-color: #3E3A39;
+  background-color: #5DD545;
   }
 .prices-box .button-dark:hover{
-background-color: #5DD545;
+background-color: #3E3A39;
 }
 .contact .button-outline-dark-2:hover{
   background-color: #5DD545; 
@@ -10812,3 +10817,8 @@ background-color: #5DD545;
     background-repeat: no-repeat;
     background-attachment: fixed; */
 }
+.clients-grid li a img {
+  opacity: 1;}
+  .clients-grid.column-4 li:hover{  box-shadow: 0 6px 36px -4px rgba(22, 24, 26, 0.14);
+    transition: all .7s;
+  }
