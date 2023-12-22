@@ -750,7 +750,38 @@ $("#contactform").on("submit", function(e) {
   e.preventDefault();
 });
 
+/*===============================================
+  22.1 leist Form
+===============================================*/
+$("#leistform").on("submit", function(e) {
 
+  e.preventDefault();
+
+  var name = $("#name").val();
+  var email = $("#email").val();  
+  var message = $("#message").val();
+  var plan = $("select.custom-select").val();
+
+  if (name === "" || email === "" || message === "" || plan === "") {
+    $("#error").addClass("show");
+  } else {
+
+    $.ajax({
+      url:"assets/php/leist-form.php",
+      method:"POST",
+      data: $(this).serialize(),
+      success:function(response) {
+        $("#leistform").trigger("reset");
+        $("#success").addClass("show");
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        $("#error").addClass("show");
+      }
+    });
+
+  }
+
+});
 /*===============================================
   23. Shop
 ===============================================*/
