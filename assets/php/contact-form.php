@@ -1,53 +1,38 @@
 <?php
 
-// Check if form was submitted 
-if($_SERVER["REQUEST_METHOD"] == "POST") {
+// Set error reporting
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 
-  // Get form data
-  $name = trim($_POST["name"]); 
-  $email = trim($_POST["email"]);
-  $mobile = trim($_POST["mobile"]);
-  $subject = trim($_POST["subject"]);
-  $message = trim($_POST["message"]);
+// Get posted data 
+$name = $_POST['name'];
+$familyName = $_POST['familyName']; 
+$mobile = $_POST['mobile'];
+$email = $_POST['email'];
+$subject = $_POST['subject'];
+$message = $_POST['message'];
 
-  // Validate form data
-  if(empty($name) || empty($email) || empty($mobile) || empty($subject) || empty($message)) {
-    $error = "Please fill in all fields.";
-  } else if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    $error = "Invalid email address."; 
-  } else if(!preg_match("/^[0-9]{10}$/", $mobile)) {
-    $error = "Invalid mobile number.";
-  } else {
+// Email headers
+$headers = "From: $name <$email>";
 
-    // Recipient email 
-    $recipient = "info@example.com";
-    
-    // Set email subject and headers
-    $subject = "Contact Form: $subject"; 
-    $headers = "From: $name <$email>";
+// Build email body
+$body = "Name: $name $familyName\n";
+$body .= "Email: $email\n";
+$body .= "Mobile: $mobile\n\n";
+$body .= "Message:\n$message";
 
-    // Build email content
-    $content = "Name: $name\n";
-    $content .= "Email: $email\n";
-    $content .= "Mobile: $mobile\n\n";
-    $content .= "Message:\n$message\n";
-    
-    // Send email  
-    $mail_sent = mail($recipient, $subject, $content, $headers);
-    
-    // Email response
-    if($mail_sent) {
-      $error = "Thanks! Your message has been sent.";
-    } else {
-      $error = "Oops! Something went wrong, please try again.";
-    }
+// Email config
+$to = "your@email.com";
+$mailSubject = "Contact form inquiry: $subject"; 
 
-  }
+// Send mail  
+$success = mail($to, $mailSubject, $body, $headers);
 
+// Return response
+if ($success) {
+  echo "Mail sent successfully!";  
+} else {
+  echo "Error sending mail!";
 }
-
-// Return JSON response
-$response = array("error" => $error);
-echo json_encode($response);
 
 ?>

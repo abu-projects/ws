@@ -754,33 +754,44 @@ $("#contactform").on("submit", function(e) {
   22.1 leist Form
 ===============================================*/
 $("#leistform").on("submit", function(e) {
-
-  e.preventDefault();
-
   var name = $("#name").val();
-  var email = $("#email").val();  
-  var message = $("#message").val();
+  var email = $("#email").val();
   var plan = $("select.custom-select").val();
+  var message = $("#message").val();
 
-  if (name === "" || email === "" || message === "" || plan === "") {
-    $("#error").addClass("show");
-  } else {
-
-    $.ajax({
-      url:"assets/php/leist-form.php",
-      method:"POST",
-      data: $(this).serialize(),
-      success:function(response) {
-        $("#leistform").trigger("reset");
-        $("#success").addClass("show");
-      },
-      error: function(jqXHR, textStatus, errorThrown) {
-        $("#error").addClass("show");
-      }
-    });
-
+  if (name === "") {
+    $("#name").addClass("error-color");
+  }
+  if (email === "") {
+    $("#email").addClass("error-color");
+  }
+  if (plan === "") {
+    $("#plan").addClass("error-color");
+  }
+  if (message === "") {
+    $("#message").addClass("error-color");
   }
 
+  else {
+    $.ajax({
+      url: "assets/php/leist-form.php",
+      data:$(this).serialize(),
+      type:"POST",
+      success:function(data){
+        $("#success").addClass("show-result"); //=== Show Success Message==
+        $("#leistform").each(function(){
+          this.reset();
+        });
+      },
+      error:function(data){
+        $("#error").addClass("show-result"); //===Show Error Message====
+      }
+    });
+    var forms = $("#leistforminput, #leistform textarea");
+    forms.removeClass("error-color");
+  }
+
+  e.preventDefault();
 });
 /*===============================================
   23. Shop

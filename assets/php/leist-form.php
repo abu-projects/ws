@@ -27,7 +27,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
 
         // Recipient email address 
-        $to = 'info@example.com';
+        $to = 'yapepo@gmail.com';
         
         // Formatting message 
         $body = "Name: {$name}\n";
