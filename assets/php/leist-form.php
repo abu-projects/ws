@@ -1,57 +1,58 @@
 <?php
+// Check if the form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Collect input data
+    $name = isset($_POST['name']) ? $_POST['name'] : '';
+    $familyName = isset($_POST['family-name']) ? $_POST['family-name'] : '';
+    $mobile = isset($_POST['mobile']) ? $_POST['mobile'] : '';
+    $email = isset($_POST['email']) ? $_POST['email'] : '';
+    $message = isset($_POST['message']) ? $_POST['message'] : '';
+    $plan = isset($_POST['plan']) ? $_POST['plan'] : '';
+    $to = 'yapepo@gmail.com'; // Replace with your email address
 
-// Check if form was submitted
-if($_SERVER["REQUEST_METHOD"] == "POST") {
-
-    // Get form data
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $phone = $_POST['phone']; 
-    $message = $_POST['message'];
-    $plan = $_POST['plan'];
-
-    // Define error and success messages
-    $missing_fields = "Please fill in all fields.";
-    $email_sent = "Thank you! Your message has been sent.";
-    $email_failed = "Something went wrong, please try again.";
-
-    // Validate form    
-    if(empty($name) || empty($email) || empty($phone) || empty($message) || empty($plan)) {
-
-        $error = $missing_fields;
-
-    } else if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-
-        $error = 'Invalid email address';
-
-    } else {
-
-        // Recipient email address 
-        $to = 'yapepo@gmail.com';
-        
-        // Formatting message 
-        $body = "Name: {$name}\n";
-        $body .= "Email: {$email}\n";
-        $body .= "Phone: {$phone}\n\n";
-        $body .= "Message:\n{$message}\n\n";
-        $body .= "Selected Plan: {$plan}";
-
-        // Set content-type header
-        $headers = "MIME-Version: 1.0" . "\r\n";
-        $headers .= "Content-type:text/plain;charset=UTF-8" . "\r\n";
-
-        // Send email
-        $mail_sent = mail($to, 'Contact Form Message', $body, $headers);
-        
-        // Check whether message is sent
-        $error = $mail_sent ? $email_sent : $email_failed; 
+    // Validate required fields
+    if (empty($name) || empty($familyName) || empty($mobile) || empty($email) || empty($message) || empty($plan)) {
+        echo "Please fill in all required fields.";
+        exit;
     }
 
-    // Return response
-    $response = ['error' => $error];
-    header('Content-Type: application/json');
-    echo json_encode($response);
+    // Validate email address
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo "Invalid email format.";
+        exit;
+    }
 
+    // Prepare the email body
+    $body = "
+    <html>
+    <head>
+      <title>New Message Coworking Büro Leibnitz</title>
+    </head>
+    <body>
+      <h2>Contact Form Message</h2>
+      <p><strong>Name:</strong> {$name} {$familyName}</p>
+      <p><strong>Email:</strong> {$email}</p>
+      <p><strong>Mobile:</strong> {$mobile}</p>
+      <p><strong>Plan:</strong> {$plan}</p>
+      <h3>Message:</h3>
+      <p>{$message}</p>
+    </body>
+    </html>
+    ";
+
+    // Prepare email headers for HTML content
+    $headers = "MIME-Version: 1.0" . "\r\n";
+    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+    $headers .= "From: <$email>" . "\r\n";
+    $headers .= "Reply-To: <$email>" . "\r\n";
+
+    // Send the email
+    if (mail($to, "New Message from Website: Coworking Büro Leibnitz", $body, $headers)) {
+        echo "Thank you! Your message has been sent.";
+    } else {
+        echo "There was a problem sending your message. Please try again.";
+    }
+} else {
+    echo "Form not submitted correctly.";
 }
-
 ?>
