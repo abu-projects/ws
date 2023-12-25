@@ -757,52 +757,43 @@ $(document).ready(function(){
 /*===============================================
   22.1 leist Form
 ===============================================*/
-$("#leistform").on("submit", function(e) {
-  var name = $("#name").val();
-  var familyName = $("#family-name").val(); // Adjust to match the field ID
-  var email = $("#email").val();
-  var mobile = $("#mobile").val(); // Adjust to match the field ID
-  var plan = $("#plan").val();
-  var message = $("#message").val();
+$(document).ready(function() {
+  $("#leistform").on("submit", function(e) {
+      e.preventDefault();
+      var formData = $(this).serialize();
 
-  if (name === "") {
-    $("#name").addClass("error-color");
-  }
-  if (familyName === "") { // Add validation for family name
-    $("#family-name").addClass("error-color");
-  }
-  if (email === "") {
-    $("#email").addClass("error-color");
-  }
-  if (mobile === "") { // Add validation for mobile
-    $("#mobile").addClass("error-color");
-  }
-  if (plan === "Plan auswählen") { // Check if the default option is selected
-    $("#plan").addClass("error-color");
-  }
-  if (message === "") {
-    $("#message").addClass("error-color");
-  }
+      // Perform client-side validation
+      var isValid = true;
+      $("#leistform input[required], #leistform select[required], #leistform textarea[required]").each(function() {
+          if ($(this).val() === "" || $(this).val() === "Plan auswählen") {
+              $(this).addClass("error-color");
+              isValid = false;
+          } else {
+              $(this).removeClass("error-color");
+          }
+      });
 
-  else {
-    $.ajax({
-      url: "assets/php/leist-form.php",
-      data: $(this).serialize(),
-      type: "POST",
-      success: function(data) {
-        $("#success").addClass("show-result"); // Show Success Message
-        $("#leistform")[0].reset(); // Reset the form
-      },
-      error: function(data) {
-        $("#error").addClass("show-result"); // Show Error Message
+      if (isValid) {
+          $.ajax({
+              url: "assets/php/leist-form.php",
+              data: formData,
+              type: "POST",
+              success: function(response) {
+                  if (response === "success") {
+                      $("#success").addClass("show-result");
+                  } else {
+                      $("#error").addClass("show-result");
+                  }
+                  $("#leistform")[0].reset();
+              },
+              error: function() {
+                  $("#error").addClass("show-result");
+              }
+          });
       }
-    });
-    var forms = $("#leistform input, #leistform textarea");
-    forms.removeClass("error-color");
-  }
-
-  e.preventDefault();
+  });
 });
+
 /*===============================================
   23. Shop
 ===============================================*/
